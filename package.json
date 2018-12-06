@@ -1,0 +1,23 @@
+{
+  "name": "bs4_test_site",
+  "version": "1.0.0",
+  "description": "BS4 tests site",
+  "main": "index.html",
+  "scripts": {
+    "start": "browser-sync",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/betocostadev/BS4_Tests.git"
+  },
+  "author": "Beto Costa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/betocostadev/BS4_Tests/issues"
+  },
+  "homepage": "https://github.com/betocostadev/BS4_Tests#readme",
+  "devDependencies": {
+    "browser-sync": "^2.26.3"
+  }
+}
