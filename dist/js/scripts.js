@@ -1,0 +1,1 @@
+"use strict";var testVar="Im here!";console.log(testVar);var grelos="I love grelos and... ";grelos+=testVar,console.log(grelos),console.log("Yes, Working after reload!!!");

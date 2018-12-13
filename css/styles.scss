@@ -1,13 +1,53 @@
 h1 {
   color: red;
-  :hover {
+  font-size: 4rem;
+  &:hover {
     color: blue;
   }
 }
 
 h2 {
-  background-color: green;
+  font-size: 3rem;
+  background-color: lightblue;
+  &:hover {
+    background-color: blue;
+  }
 }
+
+h3 {
+  font-size: 2rem;
+  color: darkblue;
+}
+
+h4 {
+  color:darkgoldenrod;
+}
+
+p {
+  font-size: 1.3rem;
+  margin: 2rem;
+  color: darkgoldenrod;
+  font-weight: bold;
+}
+
+span {
+  font-size: 1rem;
+  font-weight: bold;
+  font-style: italic;
+}
+
+ul {
+  li {
+    font-size: 1.1rem;
+  }
+}
+
+nav {
+  margin: 1rem;
+}
+// Fuck
+// Anything? What now?
+// Fuck it!
 
 // Anything?
 // Nothing is new :(

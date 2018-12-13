@@ -10,12 +10,13 @@ import rename from 'gulp-rename';
 import cleanCSS from 'gulp-clean-css';
 import del from 'del';
 import imagemin from 'gulp-imagemin';
+import htmlmin from 'gulp-htmlmin';
 import browserSync from 'browser-sync';
 
 /* Browser Sync config */
 const files = [
     './*.html',
-    './css/*.css',
+    './css/*.scss', // Using this was to auto refresh when the scss is changed
     './js/*.js',
     './img/*.{png,jpg,gif}'
 ];
@@ -28,14 +29,14 @@ function reload(done) {
 function serve(done) {
   server.init(files, {
     server: {
-        baseDir: './'
+        baseDir: './dist'
     },
     browser: ["chrome"]
   });
   done();
 }
 
-
+// Gulp Paths
 const paths = {
   styles: {
     src: './css/*.scss',
@@ -48,6 +49,10 @@ const paths = {
   images: {
     src: './img/*.{jpg,jpeg,png,gif}',
     dest: 'dist/img/'
+  },
+  html: {
+    src: './*.html',
+    dest: 'dist/'
   }
 };
 
@@ -61,13 +66,15 @@ export const clean = () => del([ 'dist' ]);
  */
 export function styles() {
   return gulp.src(paths.styles.src)
-    .pipe(sass())
+    .pipe(sass({outputStyle: 'compact'}))
     .pipe(cleanCSS())
+
     // pass in options to the stream
-    .pipe(rename({
-      basename: 'styles',
-      suffix: '.min'
-    }))
+
+    // .pipe(rename({
+    //   basename: 'styles',
+    //   suffix: '.min'
+    // }))
     .pipe(gulp.dest(paths.styles.dest));
 }
 
@@ -75,7 +82,7 @@ export function scripts() {
   return gulp.src(paths.scripts.src, { sourcemaps: true })
     .pipe(babel())
     .pipe(uglify())
-    .pipe(concat('main.min.js'))
+    .pipe(concat('scripts.js')) // Use the name you want for the output file.
     .pipe(gulp.dest(paths.scripts.dest));
 }
 
@@ -85,25 +92,29 @@ function images() {
     .pipe(gulp.dest(paths.images.dest));
 }
 
+export function minify() {
+  return gulp.src(paths.html.src)
+  .pipe(htmlmin({ collapseWhitespace: true }))
+  .pipe(gulp.dest(paths.html.dest));
+}
+
  /*
   * You could even use `export as` to rename exported tasks
   */
 function watchFiles() {
   gulp.watch(paths.scripts.src, scripts);
   gulp.watch(paths.styles.src, styles);
+  gulp.watch(paths.html.src, minify);
   gulp.watch(paths.images.src, images);
 }
 export { watchFiles as watch };
 
+/* Will clean the 'dist' folder, build the files using the scripts, run the server and watch the files. */
 
-const build = gulp.series(clean, gulp.parallel(styles, scripts, images));
+const build = gulp.series(clean, gulp.parallel(styles, scripts, minify, images), gulp.parallel(serve, watchFiles));
+
 /*
  * Export a default task
  */
 export default build;
 
-/* Browser Sync final touches - FIX THIS */
-
-// const watch = () => gulp.watch(paths.scripts.src, paths.styles.src, gulp.series(scripts, styles, reload));
-// const dev = gulp.series(clean, scripts, serve, watch);
-// export { dev as start};
