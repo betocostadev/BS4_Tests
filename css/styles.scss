@@ -1,39 +1,27 @@
+body {
+  background-color: LightSalmon;
+}
+
+header {
+  background-color: SandyBrown;
+}
+
 h1 {
-  color: red;
-  font-size: 4rem;
-  &:hover {
-    color: blue;
-  }
+  color: darkgreen;
+  font-size: 3rem;
 }
 
 h2 {
-  font-size: 3rem;
-  background-color: lightblue;
-  &:hover {
-    background-color: blue;
-  }
-}
-
-h3 {
-  font-size: 2rem;
-  color: darkblue;
-}
-
-h4 {
-  color:darkgoldenrod;
+  font-size: 2.2rem;
+  color: darkolivegreen;
+  // &:hover {
+  //   background-color: blue;
+  // }
 }
 
 p {
-  font-size: 1.3rem;
-  margin: 2rem;
-  color: darkgoldenrod;
-  font-weight: bold;
-}
-
-span {
-  font-size: 1rem;
-  font-weight: bold;
-  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.3rem;
 }
 
 ul {
@@ -42,9 +30,10 @@ ul {
   }
 }
 
-nav {
-  margin: 1rem;
+i {
+  font-size: 2.5rem;
 }
+
 // Fuck
 // Anything? What now?
 // Fuck it!
